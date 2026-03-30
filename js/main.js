@@ -469,7 +469,9 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
     item.addEventListener('mouseleave', () => { activeCity = null; });
   });
 
-  function drawPin(cx, cy, city, W, H, boost) {
+  function drawPin(cx, cy, city, W, H, boost, zoom) {
+    zoom = zoom || 1;
+    const iz = 1 / zoom; // inverse scale for text/labels
     const { color, name, co, period, always } = city;
     const t    = Date.now() / 500;
     const pulse = (Math.sin(t) * 0.5 + 0.5); // 0..1
@@ -479,7 +481,7 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
 
     if (isLive) {
       // Outer ring
-      const r1 = boost ? 10 + pulse * 26 : 6 + pulse * 18;
+      const r1 = (boost ? 10 + pulse * 26 : 6 + pulse * 18) * iz;
       ctx.beginPath();
       ctx.arc(cx, cy, r1, 0, Math.PI * 2);
       ctx.strokeStyle = color;
@@ -487,7 +489,7 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
       ctx.globalAlpha = (1 - pulse) * (boost ? 0.9 : 0.6);
       ctx.stroke();
       // Inner ring
-      const r2 = boost ? 6 + pulse * 14 : 4 + pulse * 10;
+      const r2 = (boost ? 6 + pulse * 14 : 4 + pulse * 10) * iz;
       ctx.beginPath();
       ctx.arc(cx, cy, r2, 0, Math.PI * 2);
       ctx.strokeStyle = color;
@@ -510,43 +512,43 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
 
     // Dot
     ctx.beginPath();
-    ctx.arc(cx, cy, boost ? 5 : 3.5, 0, Math.PI * 2);
+    ctx.arc(cx, cy, (boost ? 5 : 3.5) * iz, 0, Math.PI * 2);
     ctx.fillStyle = color;
     ctx.globalAlpha = boost ? 1 : 0.85;
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(cx, cy, boost ? 3 : 2, 0, Math.PI * 2);
+    ctx.arc(cx, cy, (boost ? 3 : 2) * iz, 0, Math.PI * 2);
     ctx.fillStyle = '#fff';
     ctx.fill();
     ctx.globalAlpha = 1;
 
     // Label (only when active or always:true)
     if (boost || always) {
-      const lx = cx + 8, ly = cy - 18;
+      const lx = cx + 8 * iz, ly = cy - 18 * iz;
       ctx.strokeStyle = color;
-      ctx.lineWidth   = 0.7;
+      ctx.lineWidth   = 0.7 * iz;
       ctx.globalAlpha = 0.8;
       ctx.beginPath();
-      ctx.moveTo(cx, cy - 4);
+      ctx.moveTo(cx, cy - 4 * iz);
       ctx.lineTo(cx, ly);
       ctx.lineTo(lx, ly);
       ctx.stroke();
       ctx.globalAlpha = 1;
 
-      ctx.font      = `bold ${boost ? 9 : 8}px monospace`;
+      ctx.font      = `bold ${(boost ? 9 : 8) * iz}px monospace`;
       ctx.fillStyle = color;
       ctx.globalAlpha = 1;
-      ctx.fillText(name, lx + 2, ly + 4);
+      ctx.fillText(name, lx + 2 * iz, ly + 4 * iz);
 
-      ctx.font      = `${boost ? 7.5 : 6.5}px monospace`;
+      ctx.font      = `${(boost ? 7.5 : 6.5) * iz}px monospace`;
       ctx.fillStyle = color;
       ctx.globalAlpha = 0.75;
-      ctx.fillText(co, lx + 2, ly + 12);
+      ctx.fillText(co, lx + 2 * iz, ly + 12 * iz);
 
-      ctx.font      = `6px monospace`;
+      ctx.font      = `${6 * iz}px monospace`;
       ctx.fillStyle = color;
       ctx.globalAlpha = 0.5;
-      ctx.fillText(period, lx + 2, ly + 20);
+      ctx.fillText(period, lx + 2 * iz, ly + 20 * iz);
       ctx.globalAlpha = 1;
     }
   }
@@ -599,9 +601,9 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       });
       ctx.closePath();
-      ctx.fillStyle   = 'rgba(0,245,255,0.13)';
-      ctx.strokeStyle = 'rgba(0,245,255,0.48)';
-      ctx.lineWidth   = 0.85;
+      ctx.fillStyle   = 'rgba(0,245,255,0.18)';
+      ctx.strokeStyle = 'rgba(0,245,255,0.55)';
+      ctx.lineWidth   = 0.9;
       ctx.fill();
       ctx.stroke();
     });
@@ -631,14 +633,15 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
       ctx.globalAlpha = 1;
     });
 
-    ctx.restore(); // end zoom transform
-
-    // Draw pins — Perth always boosted, others boosted on hover
+    // Draw pins INSIDE the zoom transform so they move with the map
     Object.entries(CITIES).forEach(([key, city]) => {
       const [cx, cy] = proj(city.lon, city.lat, W, H);
       const boost = (key === 'perth') || (key === activeCity);
-      drawPin(cx, cy, city, W, H, boost);
+      // Pass current zoom so drawPin can compensate font/dot sizes
+      drawPin(cx, cy, city, W, H, boost, zoomLvl);
     });
+
+    ctx.restore(); // end zoom transform
   }
 
   function loop() { draw(); requestAnimationFrame(loop); }
