@@ -1394,28 +1394,43 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 }
 
 /* ═══════════════════════════════════
-   WORLD MAP — CONTACT
+   WORLD MAP — CONTACT FULLBLEED BG
 ═══════════════════════════════════ */
-.contact-map-wrap {
-  position: relative; margin-bottom: 32px;
-  border: 1px solid var(--border);
-  background: var(--bg2); overflow: hidden;
+.contact {
+  position: relative;
+  overflow: hidden;
 }
-.world-map {
-  width: 100%; display: block;
-  max-height: 220px;
+.contact-map-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
 }
-/* animated horizontal scan line */
+.world-map-bg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+/* vignette so content stays legible */
+.contact-map-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,  rgba(5,5,7,.92) 0%, rgba(5,5,7,.7) 45%, rgba(5,5,7,.55) 100%),
+    linear-gradient(to bottom, rgba(5,5,7,.6)  0%, rgba(5,5,7,.1) 40%, rgba(5,5,7,.6) 100%);
+}
+/* horizontal scan line across the whole bg */
 .map-scan-line {
   position: absolute; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,245,255,.4), transparent);
-  animation: map-scan 4s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,245,255,.5) 40%, rgba(0,245,255,.5) 60%, transparent 100%);
+  animation: map-scan 6s linear infinite;
   top: 0;
 }
 @keyframes map-scan {
   0%   { top: 0%;   opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
   100% { top: 100%; opacity: 0; }
 }
 
