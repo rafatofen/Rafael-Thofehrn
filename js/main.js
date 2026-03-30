@@ -322,3 +322,53 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
     if (arrow) arrow.style.boxShadow = '';
   });
 });
+
+/* ─── CONTACT MATRIX RAIN ─── */
+(function initMatrix() {
+  const canvas = document.getElementById('contact-matrix');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+
+  // Characters: mix of binary, hex digits, katakana-ish symbols
+  const CHARS = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF#@%&!?';
+
+  const FONT_SIZE = 14;
+  let cols, drops;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    cols  = Math.floor(canvas.width / FONT_SIZE);
+    drops = Array.from({ length: cols }, () => Math.random() * -50);
+  }
+
+  function draw() {
+    // Fade trail
+    ctx.fillStyle = 'rgba(5,5,7,0.055)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = `${FONT_SIZE}px monospace`;
+
+    for (let i = 0; i < cols; i++) {
+      const char = CHARS[Math.floor(Math.random() * CHARS.length)];
+      const y    = drops[i] * FONT_SIZE;
+
+      // Head glyph — bright cyan/white
+      const headAlpha = 0.9;
+      const isHead    = drops[i] > 0 && y < canvas.height;
+      ctx.fillStyle = isHead ? `rgba(220,255,255,${headAlpha})` : `rgba(0,245,255,0.65)`;
+      ctx.fillText(char, i * FONT_SIZE, y);
+
+      // Occasionally reset column
+      if (y > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i] += 0.5;
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  setInterval(draw, 50);
+})();
