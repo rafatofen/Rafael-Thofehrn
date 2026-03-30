@@ -210,7 +210,14 @@ if (hamburger && mobileMenu) {
 }
 
 /* ─── REVEAL ON SCROLL ─── */
-const revealEls = document.querySelectorAll('.reveal');
+// Give each gcard a stagger delay based on its position in the grid
+document.querySelectorAll('.gallery-grid').forEach(grid => {
+  grid.querySelectorAll('.gcard').forEach((card, i) => {
+    card.style.transitionDelay = `${(i % 3) * 0.1}s`;
+  });
+});
+
+const revealEls = document.querySelectorAll('.reveal, .gcard, .cat-box');
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -218,7 +225,7 @@ const revealObs = new IntersectionObserver(entries => {
       revealObs.unobserve(e.target);
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.06 });
 revealEls.forEach(el => revealObs.observe(el));
 
 /* ─── COUNT UP ─── */
