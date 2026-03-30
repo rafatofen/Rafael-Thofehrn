@@ -1281,9 +1281,145 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
   .disc-item:nth-child(3) .disc-icon { border-color: var(--neon-c); color: var(--neon-c); }
   .disc-item:nth-child(4) .disc-icon { border-color: var(--neon-g); color: var(--neon-g); }
   .disc-item:nth-child(5) .disc-icon { border-color: var(--neon-r); color: var(--neon-r); }
-  .disc-item:nth-child(1) .disc-line,
-  .disc-item:nth-child(2) .disc-line,
-  .disc-item:nth-child(3) .disc-line,
-  .disc-item:nth-child(4) .disc-line,
-  .disc-item:nth-child(5) .disc-line { width: 40px; }
+  .disc-item:nth-child(6) .disc-icon { border-color: var(--neon-p); color: var(--neon-p); }
+  .disc-item .disc-line { width: 40px; }
+}
+
+/* ═══════════════════════════════════
+   EDUCATION BLOCK (About)
+═══════════════════════════════════ */
+.about-edu {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin: 20px 0 8px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  background: rgba(0,245,255,.03);
+  position: relative;
+  transition: border-color .3s;
+}
+.about-edu::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--neon-c);
+}
+.about-edu:hover { border-color: rgba(0,245,255,.2); }
+.edu-icon {
+  color: var(--neon-c); margin-top: 2px; flex-shrink: 0;
+}
+.edu-degree {
+  font-family: var(--body); font-size: .88rem; font-weight: 700;
+  color: var(--text); margin-bottom: 4px;
+}
+.edu-school {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════
+   SMART WORK BANNER
+═══════════════════════════════════ */
+.smart-banner {
+  margin: 0 48px;
+  border: 1px solid var(--border);
+  border-top: none;
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+}
+.smart-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,245,255,.04) 0%, rgba(191,95,255,.04) 50%, rgba(57,255,20,.04) 100%);
+  opacity: 0; transition: opacity .5s;
+}
+.smart-banner:hover::before { opacity: 1; }
+
+.smart-banner-inner {
+  display: flex; align-items: center; gap: 32px;
+  padding: 28px 40px; flex-wrap: wrap;
+}
+.smart-tag {
+  font-family: var(--display); font-size: 1.1rem; letter-spacing: 3px;
+  color: var(--bg); background: var(--neon-c); padding: 6px 18px;
+  white-space: nowrap; flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(0,245,255,.3);
+}
+.smart-copy {
+  font-size: .88rem; color: var(--text-muted); line-height: 1.7;
+  flex: 1; min-width: 200px;
+}
+.smart-highlight { color: var(--text); font-weight: 700; }
+.smart-pills {
+  display: flex; gap: 10px; flex-wrap: wrap; flex-shrink: 0;
+}
+.smart-pills span {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 6px 12px;
+  border: 1px solid var(--border); color: var(--text-muted);
+  white-space: nowrap; transition: all .25s;
+}
+.smart-banner:hover .smart-pills span {
+  border-color: rgba(0,245,255,.25); color: var(--neon-c);
+}
+
+@media (max-width: 900px) {
+  .smart-banner { margin: 0; border-left: none; border-right: none; }
+  .smart-banner-inner { padding: 24px; gap: 20px; }
+  .smart-pills { display: none; }
+}
+
+/* ═══════════════════════════════════
+   DISC-ITEM AI — 6-col
+═══════════════════════════════════ */
+.disc-strip { grid-template-columns: repeat(6, 1fr); }
+.disc-item--ai:hover .disc-icon {
+  border-color: var(--neon-p); color: var(--neon-p);
+  box-shadow: 0 0 14px rgba(191,95,255,.25);
+}
+.disc-item--ai:hover .disc-title { color: var(--neon-p); }
+.disc-item--ai:hover { background: rgba(191,95,255,.04); }
+.disc-item--ai .disc-line { background: var(--neon-p); }
+
+@media (max-width: 1200px) {
+  .disc-strip { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1024px) {
+  .disc-strip { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .disc-strip { grid-template-columns: 1fr; }
+  /* AI always-on purple on mobile */
+  .disc-item--ai .disc-icon { border-color: var(--neon-p); color: var(--neon-p); }
+  .disc-item--ai .disc-line { width: 40px; }
+}
+
+/* ═══════════════════════════════════
+   WORLD MAP — CONTACT
+═══════════════════════════════════ */
+.contact-map-wrap {
+  position: relative; margin-bottom: 32px;
+  border: 1px solid var(--border);
+  background: var(--bg2); overflow: hidden;
+}
+.world-map {
+  width: 100%; display: block;
+  max-height: 220px;
+}
+/* animated horizontal scan line */
+.map-scan-line {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,245,255,.4), transparent);
+  animation: map-scan 4s ease-in-out infinite;
+  top: 0;
+}
+@keyframes map-scan {
+  0%   { top: 0%;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* disc-item animation on mobile — always-on neon for AI */
+@media (max-width: 600px) {
+  .disc-item--ai .disc-icon { border-color: var(--neon-p); color: var(--neon-p); }
 }
