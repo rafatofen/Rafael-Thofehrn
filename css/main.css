@@ -571,16 +571,16 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
    PAGE HERO (portfolio.html)
 ═══════════════════════════════════ */
 .page-hero {
-  min-height: 50vh; display: flex; align-items: flex-end;
-  justify-content: flex-start; padding: 120px 48px 60px;
+  min-height: auto; display: flex; align-items: flex-end;
+  justify-content: flex-start; padding: 96px 48px 36px;
   position: relative; overflow: hidden; border-bottom: 1px solid var(--border);
 }
 .page-hero-content { position: relative; z-index: 1; }
-.page-hero-label { font-family: var(--mono); font-size: .7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--neon-c); margin-bottom: 16px; }
+.page-hero-label { font-family: var(--mono); font-size: .7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--neon-c); margin-bottom: 12px; }
 .page-hero-title {
   font-family: var(--display);
-  font-size: clamp(80px,14vw,160px);
-  letter-spacing: 4px; line-height: .88; margin-bottom: 20px;
+  font-size: clamp(56px,10vw,120px);
+  letter-spacing: 4px; line-height: .88; margin-bottom: 14px;
 }
 .page-hero-sub { font-family: var(--mono); font-size: .75rem; letter-spacing: 1.5px; color: var(--text-muted); }
 
@@ -824,13 +824,58 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 .cat-box--brand:hover  .cat-corner { border-color: rgba(191,95,255,.4); }
 
 @media (max-width: 900px) {
-  .cat-grid { grid-template-columns: 1fr; }
-  .cat-box { border-right: none; border-bottom: 1px solid var(--border); min-height: auto; padding: 40px 28px; }
-  .cat-box:last-child { border-bottom: none; }
+  /* 3-column compact menu on mobile */
+  .cat-grid {
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .cat-box {
+    border-right: 1px solid var(--border);
+    border-bottom: none;
+    min-height: auto;
+    padding: 24px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cat-box:last-child { border-right: none; }
+
+  /* hide verbose content on mobile */
+  .cat-box-desc,
+  .cat-box-meta,
+  .cat-box-tags,
+  .cat-box-num { display: none; }
+
+  .cat-box-icon {
+    width: 44px; height: 44px;
+    margin-bottom: 12px;
+  }
+  .cat-box-title {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+
+  /* always-on neon states on touch — one per category */
+  .cat-box--motion .cat-box-bg { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
+  .cat-box--motion .cat-box-icon { border-color: var(--neon-r); color: var(--neon-r); box-shadow: 0 0 12px rgba(255,45,85,.2); }
+  .cat-box--motion .cat-box-title { color: var(--neon-r); }
+  .cat-box--motion .cat-corner { border-color: rgba(255,45,85,.35); }
+
+  .cat-box--web .cat-box-bg { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
+  .cat-box--web .cat-box-icon { border-color: var(--neon-c); color: var(--neon-c); box-shadow: 0 0 12px rgba(0,245,255,.2); }
+  .cat-box--web .cat-box-title { color: var(--neon-c); }
+  .cat-box--web .cat-corner { border-color: rgba(0,245,255,.35); }
+
+  .cat-box--brand .cat-box-bg { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
+  .cat-box--brand .cat-box-icon { border-color: var(--neon-p); color: var(--neon-p); box-shadow: 0 0 12px rgba(191,95,255,.2); }
+  .cat-box--brand .cat-box-title { color: var(--neon-p); }
+  .cat-box--brand .cat-corner { border-color: rgba(191,95,255,.35); }
 }
 
 /* ─── PAGE HERO SHORT (work-*.html) ─── */
-.page-hero--short { min-height: 36vh; padding-top: 100px; padding-bottom: 40px; }
+.page-hero--short { min-height: auto; padding-top: 88px; padding-bottom: 32px; }
 .breadcrumb { color: var(--text-dim); text-decoration: none; font-family: var(--mono); font-size: .65rem; letter-spacing: 2px; text-transform: uppercase; transition: color .2s; }
 .breadcrumb:hover { color: var(--neon-c); }
 
