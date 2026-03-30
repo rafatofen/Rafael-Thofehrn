@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rafael Thofehrn — Motion Designer & Project Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Syne+Mono&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="icon" href="favicon.ico"/>
+</head>
+<body>
+
+<!-- SCANLINES OVERLAY -->
+<div class="scanlines" aria-hidden="true"></div>
+
+<!-- CURSOR -->
+<div id="cur" aria-hidden="true"></div>
+<div id="cur-ring" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="index.html" class="logo">
+    <span class="logo-r">Rafael</span><span class="logo-t">Thofehrn</span>
+  </a>
+  <nav>
+    <ul class="nav-list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="#reel">Reel</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="https://drive.google.com/file/d/1vHFc_T145xbv9X3YmAtdcXvVGvhJw_3y/view?usp=sharing" target="_blank" class="nav-cta">Resume ↗</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" class="mob-link">About</a></li>
+    <li><a href="#experience" class="mob-link">Experience</a></li>
+    <li><a href="portfolio.html" class="mob-link">Portfolio</a></li>
+    <li><a href="#reel" class="mob-link">Reel</a></li>
+    <li><a href="#contact" class="mob-link">Contact</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="home">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-noise"></div>
+  <div class="hero-grid-lines" aria-hidden="true"></div>
+
+  <!-- big glitch name -->
+  <div class="hero-center">
+    <div class="glitch-wrap">
+      <h1 class="glitch" data-text="RAFAEL">RAFAEL</h1>
+      <h1 class="glitch glitch-last" data-text="THOFEHRN">THOFEHRN</h1>
+    </div>
+    <div class="hero-sub-row">
+      <span class="hero-role">Motion Designer</span>
+      <span class="hero-dot">◆</span>
+      <span class="hero-role">Project Manager</span>
+      <span class="hero-dot">◆</span>
+      <span class="hero-role">Perth, AU</span>
+    </div>
+    <p class="hero-desc">
+      Turning <span class="neon-r">problems</span> into <span class="neon-g">creative solutions</span><br/>
+      across multiple platforms — with efficiency and purpose.
+    </p>
+    <div class="hero-ctas">
+      <a href="portfolio.html" class="btn-neon">View Work</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- floating status badge -->
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Available for projects — 2026
+  </div>
+
+  <!-- scroll hint -->
+  <div class="scroll-down">
+    <div class="scroll-line-wrap"><div class="scroll-line-inner"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ═══════════════ MARQUEE ═══════════════ -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Motion Design</span><span class="sep">◆</span>
+    <span>DOOH</span><span class="sep">◆</span>
+    <span>HTML5 Animation</span><span class="sep">◆</span>
+    <span>Social Media</span><span class="sep">◆</span>
+    <span>TV Ads</span><span class="sep">◆</span>
+    <span>After Effects</span><span class="sep">◆</span>
+    <span>Project Management</span><span class="sep">◆</span>
+    <span>Creative Leadership</span><span class="sep">◆</span>
+    <span>Stellantis</span><span class="sep">◆</span>
+    <span>Heineken</span><span class="sep">◆</span>
+    <span>Volkswagen</span><span class="sep">◆</span>
+    <span>Vivo</span><span class="sep">◆</span>
+    <!-- duplicate for seamless loop -->
+    <span>Motion Design</span><span class="sep">◆</span>
+    <span>DOOH</span><span class="sep">◆</span>
+    <span>HTML5 Animation</span><span class="sep">◆</span>
+    <span>Social Media</span><span class="sep">◆</span>
+    <span>TV Ads</span><span class="sep">◆</span>
+    <span>After Effects</span><span class="sep">◆</span>
+    <span>Project Management</span><span class="sep">◆</span>
+    <span>Creative Leadership</span><span class="sep">◆</span>
+    <span>Stellantis</span><span class="sep">◆</span>
+    <span>Heineken</span><span class="sep">◆</span>
+    <span>Volkswagen</span><span class="sep">◆</span>
+    <span>Vivo</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section class="about section" id="about">
+  <div class="container">
+    <div class="section-label reveal">[ 01 ] ABOUT</div>
+    <div class="about-grid">
+      <div class="about-photo-col reveal">
+        <div class="photo-frame">
+          <img src="images/profile_square.png" alt="Rafael Thofehrn"
+               onerror="this.parentElement.classList.add('no-img')"/>
+          <div class="photo-corner tl"></div>
+          <div class="photo-corner tr"></div>
+          <div class="photo-corner bl"></div>
+          <div class="photo-corner br"></div>
+        </div>
+        <div class="photo-caption">
+          <span class="live-dot"></span>
+          Perth, Western Australia
+        </div>
+      </div>
+      <div class="about-text-col reveal delay-1">
+        <h2 class="about-heading">
+          Multimedia<br/>
+          <em>Designer</em><br/>
+          & Leader
+        </h2>
+        <p>I bring a solid background in advertising campaigns, video production, HTML5 animation, digital content, and creative leadership. Passionate about problem-solving and delivering engaging, impactful content across platforms with efficiency and purpose.</p>
+        <p>Throughout my career, I've worked on diverse projects for DOOH, social media, HTML5 banners, and TV ads — always focused on creative, dynamic, and technically sound solutions. I constantly seek new challenges that demand innovation and a hands-on approach.</p>
+        <div class="about-stats">
+          <div class="astat">
+            <span class="astat-n" data-target="5">0</span><span class="astat-s">+</span>
+            <div class="astat-l">Years</div>
+          </div>
+          <div class="astat">
+            <span class="astat-n" data-target="300">0</span><span class="astat-s">+</span>
+            <div class="astat-l">Weekly Assets</div>
+          </div>
+          <div class="astat">
+            <span class="astat-n" data-target="14">0</span><span class="astat-s">+</span>
+            <div class="astat-l">Projects</div>
+          </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1vHFc_T145xbv9X3YmAtdcXvVGvhJw_3y/view?usp=sharing" target="_blank" class="btn-neon">Download Resume ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EXPERIENCE ═══════════════ -->
+<section class="experience section" id="experience">
+  <div class="container">
+    <div class="section-label reveal">[ 02 ] EXPERIENCE</div>
+    <h2 class="section-title reveal">Professional<br/><em>Journey</em></h2>
+
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-left">
+          <div class="tl-period">May 2024 — Sep 2025</div>
+          <div class="tl-badge">Team Lead</div>
+        </div>
+        <div class="tl-bar">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <h3 class="tl-role">Multimedia Producer <span class="tl-accent">— Team Lead</span></h3>
+          <div class="tl-company">Vati · São Paulo, Brazil</div>
+          <p class="tl-desc">Managing creative teams to deliver high-quality, on-time campaigns across multiple platforms. Responsible for organizing production systems and workflows to ensure seamless execution, while overseeing technical QA and optimizing processes. Contributed to the successful delivery of over 300 weekly assets for global clients.</p>
+          <div class="tl-tags">
+            <span>Stellantis</span><span>Vivo</span><span>Volkswagen</span><span>Heineken</span><span>Remote Leadership</span><span>AI Tools</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal delay-1">
+        <div class="tl-left">
+          <div class="tl-period">Oct 2022 — May 2024</div>
+          <div class="tl-badge">Motion</div>
+        </div>
+        <div class="tl-bar">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <h3 class="tl-role">Motion Designer</h3>
+          <div class="tl-company">Vati · São Paulo, Brazil</div>
+          <p class="tl-desc">Specialized in motion design for Stellantis — Jeep, Fiat, Citroën, Peugeot. Creating engaging content for digital advertising, DOOH campaigns, HTML5 animation and social media. Delivering quality videos at high velocity.</p>
+          <div class="tl-tags">
+            <span>DOOH</span><span>HTML5</span><span>After Effects</span><span>Social Media</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal delay-2">
+        <div class="tl-left">
+          <div class="tl-period">Dec 2020 — Oct 2022</div>
+          <div class="tl-badge">Motion</div>
+        </div>
+        <div class="tl-bar">
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-right">
+          <h3 class="tl-role">Motion Designer</h3>
+          <div class="tl-company">Prodigious by Publicis Groupe · Pelotas, Brazil</div>
+          <p class="tl-desc">Motion Designer at Prodigious Brasil, a production company owned by Publicis Groupe. Working on diverse projects including logo animation, promotional videos and social media content.</p>
+          <div class="tl-tags">
+            <span>Publicis Groupe</span><span>Logo Animation</span><span>Promo Videos</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TOOLS -->
+    <div class="tools-block reveal">
+      <div class="tools-heading">Software & Tools</div>
+      <div class="tools-row">
+        <div class="tool-chip featured">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#00005A"/><text x="20" y="27" text-anchor="middle" fill="#9C99FE" font-size="16" font-weight="bold">Ae</text></svg>
+          After Effects
+        </div>
+        <div class="tool-chip featured">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#00005A"/><text x="20" y="27" text-anchor="middle" fill="#9C99FE" font-size="16" font-weight="bold">Pr</text></svg>
+          Premiere Pro
+        </div>
+        <div class="tool-chip">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#2D0402"/><text x="20" y="27" text-anchor="middle" fill="#FF9B00" font-size="16" font-weight="bold">Ai</text></svg>
+          Illustrator
+        </div>
+        <div class="tool-chip">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#001E36"/><text x="20" y="27" text-anchor="middle" fill="#31AAFD" font-size="16" font-weight="bold">Ps</text></svg>
+          Photoshop
+        </div>
+        <div class="tool-chip">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#470137"/><text x="20" y="27" text-anchor="middle" fill="#E973EC" font-size="16" font-weight="bold">Xd</text></svg>
+          Adobe XD
+        </div>
+        <div class="tool-chip">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#1E1E1E"/><text x="20" y="27" text-anchor="middle" fill="#A259FF" font-size="13" font-weight="bold">Fig</text></svg>
+          Figma
+        </div>
+        <div class="tool-chip featured">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#0d1117"/><text x="20" y="27" text-anchor="middle" fill="#39FF14" font-size="12" font-weight="bold">&lt;/&gt;</text></svg>
+          HTML5
+        </div>
+        <div class="tool-chip featured">
+          <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#fff"/><text x="20" y="27" text-anchor="middle" fill="#000" font-size="14" font-weight="bold">AI</text></svg>
+          AI Tools
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ PORTFOLIO PREVIEW ═══════════════ -->
+<section class="portfolio-preview section" id="portfolio">
+  <div class="container">
+    <div class="section-label reveal">[ 03 ] SELECTED WORK</div>
+    <div class="port-header-row reveal">
+      <h2 class="section-title">Creative<br/><em>Output</em></h2>
+      <a href="portfolio.html" class="btn-ghost">View All Projects →</a>
+    </div>
+  </div>
+
+  <!-- FULL BLEED GRID -->
+  <div class="port-fullgrid">
+
+    <a href="project-911turbos.html" class="port-card port-card--large reveal">
+      <div class="port-img" style="background-image:url('images/911_turbo.png')"></div>
+      <div class="port-overlay"></div>
+      <div class="port-info">
+        <span class="port-cat">Web Design · Motion Graphics</span>
+        <h3 class="port-name">911 Turbo S<br/>Interactive Website</h3>
+      </div>
+      <span class="port-arrow">↗</span>
+    </a>
+
+    <a href="project-kudo_developments.html" class="port-card reveal delay-1">
+      <div class="port-img" style="background-image:url('images/kudodevelopments1.png')"></div>
+      <div class="port-overlay"></div>
+      <div class="port-info">
+        <span class="port-cat">Web Design</span>
+        <h3 class="port-name">Kudo Developments</h3>
+      </div>
+      <span class="port-arrow">↗</span>
+    </a>
+
+    <a href="project-group_vati.html" class="port-card reveal delay-2">
+      <div class="port-img" style="background-image:url('images/group_vati.png')"></div>
+      <div class="port-overlay"></div>
+      <div class="port-info">
+        <span class="port-cat">Motion Graphics</span>
+        <h3 class="port-name">Vati Group Reel</h3>
+      </div>
+      <span class="port-arrow">↗</span>
+    </a>
+
+    <a href="project-saboarte.html" class="port-card reveal delay-1">
+      <div class="port-img" style="background-image:url('images/saboarte1.jpg')"></div>
+      <div class="port-overlay"></div>
+      <div class="port-info">
+        <span class="port-cat">Branding · Social Media</span>
+        <h3 class="port-name">Saboarte Natural</h3>
+      </div>
+      <span class="port-arrow">↗</span>
+    </a>
+
+    <a href="project-everblue.html" class="port-card reveal delay-2">
+      <div class="port-img" style="background-image:url('images/everblue.jpg')"></div>
+      <div class="port-overlay"></div>
+      <div class="port-info">
+        <span class="port-cat">Brand Creation · Motion</span>
+        <h3 class="port-name">Everblue Brand</h3>
+      </div>
+      <span class="port-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <div class="port-cta-row">
+    <a href="portfolio.html" class="btn-neon">See All Projects</a>
+  </div>
+</section>
+
+<!-- ═══════════════ REEL ═══════════════ -->
+<section class="reel-section section" id="reel">
+  <div class="container">
+    <div class="section-label reveal">[ 04 ] MOTION REEL</div>
+    <h2 class="section-title reveal">The Reel<br/><em>2025</em></h2>
+  </div>
+  <div class="reel-fullbleed reveal">
+    <div class="reel-inner">
+      <iframe
+        src="https://www.youtube.com/embed/2tOiB0fRq8c"
+        title="Rafael Thofehrn — Motion Reel 2025"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="reel-corner tl"></div>
+    <div class="reel-corner tr"></div>
+    <div class="reel-corner bl"></div>
+    <div class="reel-corner br"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section class="contact section" id="contact">
+  <div class="container">
+    <div class="section-label reveal">[ 05 ] CONTACT</div>
+    <div class="contact-grid">
+
+      <div class="contact-left reveal">
+        <h2 class="contact-heading">Let's make<br/><em>something</em><br/>great.</h2>
+        <div class="contact-details">
+          <div class="cd-item">
+            <span class="cd-label">Email</span>
+            <a href="mailto:rafathofehrn@gmail.com" class="cd-value">rafathofehrn@gmail.com</a>
+          </div>
+          <div class="cd-item">
+            <span class="cd-label">Phone</span>
+            <span class="cd-value">+61 0493 304 748</span>
+          </div>
+          <div class="cd-item">
+            <span class="cd-label">Location</span>
+            <span class="cd-value">Perth, Western Australia</span>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.behance.net/rafatofen" target="_blank" class="social-link" aria-label="Behance">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 11.5C8.33 11.5 9 10.83 9 10S8.33 8.5 7.5 8.5 6 9.17 6 10 6.67 11.5 7.5 11.5M7.5 16C9.43 16 11 14.43 11 12.5S9.43 9 7.5 9 4 10.57 4 12.5 5.57 16 7.5 16M15 4H18V5H15V4M13 12.5C13 10.57 14.57 9 16.5 9S20 10.57 20 12.5H13M16.5 7C13.46 7 11 9.46 11 12.5S13.46 18 16.5 18c1.86 0 3.5-.92 4.5-2.33L19.33 15C18.72 15.9 17.67 16.5 16.5 16.5c-1.46 0-2.7-.88-3.27-2.15H21c.03-.28.04-.56.04-.85C21.04 9.96 19.04 7 16.5 7Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/rafatofen" target="_blank" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452H20.447ZM5.337 7.433C4.193 7.433 3.274 6.507 3.274 5.368C3.274 4.23 4.194 3.305 5.337 3.305C6.477 3.305 7.401 4.23 7.401 5.368C7.401 6.507 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452ZM22.225 0H1.771C0.792 0 0 0.774 0 1.729V22.271C0 23.227 0.792 24 1.771 24H22.222C23.2 24 24 23.227 24 22.271V1.729C24 0.774 23.2 0 22.222 0H22.225Z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/rafael.thofehrn/" target="_blank" class="social-link" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C20.102 2.381 21.621 3.924 21.769 7.152C21.827 8.417 21.838 8.797 21.838 12.001C21.838 15.206 21.826 15.585 21.769 16.85C21.62 20.075 20.105 21.621 16.85 21.769C15.584 21.827 15.206 21.839 12 21.839C8.796 21.839 8.416 21.827 7.151 21.769C3.891 21.62 2.38 20.07 2.232 16.849C2.174 15.584 2.162 15.205 2.162 12C2.162 8.796 2.175 8.417 2.232 7.151C2.381 3.924 3.896 2.38 7.151 2.232C8.417 2.175 8.796 2.163 12 2.163ZM12 0C8.741 0 8.333.014 7.053.072C2.695.272.273 2.69.073 7.052C.014 8.333 0 8.741 0 12C0 15.259.014 15.668.072 16.948C.272 21.306 2.69 23.728 7.052 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C21.302 23.728 23.73 21.31 23.927 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.732 2.699 21.311.273 16.949.073C15.668.014 15.259 0 12 0ZM12 5.838C8.597 5.838 5.838 8.597 5.838 12S8.597 18.163 12 18.163 18.162 15.404 18.162 12C18.162 8.597 15.403 5.838 12 5.838ZM12 16C9.791 16 8 14.21 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.21 14.209 16 12 16ZM18.406 4.155C18.406 4.955 17.761 5.6 16.961 5.6C16.161 5.6 15.516 4.955 15.516 4.155C15.516 3.355 16.161 2.71 16.961 2.71C17.761 2.71 18.406 3.355 18.406 4.155Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-right reveal delay-1">
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/rafathofehrn@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="hidden" name="_next" value="index.html"/>
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="John Doe" required/>
+          </div>
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" name="email" placeholder="john@email.com" required/>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" name="subject" placeholder="Project inquiry"/>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn-neon w-full">Send Message →</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="logo-r">Rafael</span><span class="logo-t">Thofehrn</span>
+    </div>
+    <div class="footer-copy">© 2026 Rafael Thofehrn. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="portfolio.html">Portfolio</a>
+      <a href="https://www.behance.net/rafatofen" target="_blank">Behance</a>
+      <a href="https://www.linkedin.com/in/rafatofen" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

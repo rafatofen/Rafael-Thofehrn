@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitsubishi Eclipse Illustration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/background.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Project Page Specific Styles */
+        .project-container {
+            min-height: 100vh;
+            padding-top: 120px;
+            padding-bottom: 60px;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .project-category {
+            color: #e74c3c;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .project-description {
+            color: #b8b8b8;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Project Images */
+        .project-images {
+            margin: 60px 0;
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 1000px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 0px;
+            margin: 0 auto 0px;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .secondary-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .secondary-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Project Details */
+        .project-details {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .detail-section h3 {
+            color: #e74c3c;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .detail-section p, .detail-section ul {
+            color: #b8b8b8;
+            line-height: 1.6;
+        }
+
+        .detail-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-section li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .detail-section li:before {
+            content: "•";
+            color: #e74c3c;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 107, 107, 0.1);
+            color: #e74c3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        .project-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 107, 107, 0.2);
+            border-color: rgba(255, 107, 107, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .nav-button.primary {
+            background: linear-gradient(135deg, #e74c3c, #e74c3c);
+            border-color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-container {
+                padding-top: 100px;
+            }
+
+            .project-title {
+                font-size: 2.2rem;
+            }
+
+            .project-details {
+                padding: 30px 20px;
+                margin: 40px 0;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .main-image {
+                height: 300px;
+                margin: 0 20px 40px;
+            }
+
+            .project-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-title {
+                font-size: 1.8rem;
+            }
+
+            .project-description {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background animado -->
+    <div class="animated-background">
+        <div class="geometric-shapes"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-first">Rafael</span><span class="logo-last">Thofehrn</span>
+                </a>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#experience">Experience</a></li>
+                        <li><a href="gallery.html">Portfolio</a></li>
+                        <li><a href="index.html#motion-reel">Motion Reel</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Content -->
+    <section class="project-container">
+        <div class="container">
+            <div class="project-header fade-in-up">
+                <h1 class="project-title">Mitsubishi Eclipse Illustration</h1>
+                <p class="project-category">Illustration & Motion Graphics</p>
+                <p class="project-description">
+                    Illustration & Motion Graphics of a Mitsubishi Eclipse 1995.
+                </p>
+            </div>
+
+            <!-- Project Images -->
+            <div class="video-container scale-in" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <!-- iframe para vídeo YouTube responsivo -->
+            <iframe
+                src="https://www.youtube.com/embed/ya6XR-ssxHE"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="position: absolute; top:0; left:0; width:100%; height:100%;">
+            </iframe>
+            </div>
+            <img src="images/eclipse_illustration.png" alt="Everblue Gif" class="main-image">
+
+            <!-- Project Details -->
+            <div class="project-details">
+                <div class="details-grid">
+                    <div class="detail-section">
+                        <h3>Challenge</h3>
+                        <p>
+                           Illustrate & animate the car.
+                        </p>
+                    </div>
+                    <div class="detail-section">
+                        <h3>Creation process</h3>
+                        <ul>
+                            <li>Draw</li>
+                            <li>Animate</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Softwares Used</h3>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Illustrator</span>
+                            <span class="tech-tag">After Effects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="project-nav">
+                <a href="gallery.html" class="nav-button primary">Return to Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Rafael Thofehrn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
