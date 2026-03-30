@@ -323,52 +323,294 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
   });
 });
 
-/* ─── CONTACT MATRIX RAIN ─── */
-(function initMatrix() {
-  const canvas = document.getElementById('contact-matrix');
-  if (!canvas) return;
 
+
+/* ─── EXPERIENCE MAP CANVAS ─── */
+(function initExpMap() {
+  const canvas = document.getElementById('exp-map-canvas');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  // Characters: mix of binary, hex digits, katakana-ish symbols
-  const CHARS = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF#@%&!?';
+  // Equirectangular: lon/lat → canvas x/y
+  function proj(lon, lat, W, H) {
+    return [(lon + 180) / 360 * W, (90 - lat) / 180 * H];
+  }
 
-  const FONT_SIZE = 14;
-  let cols, drops;
+  // Real-world continent outlines (simplified Natural Earth)
+  const CONTINENTS = [
+    // North America
+    [[-168,72],[-140,74],[-95,74],[-75,72],[-65,60],[-52,47],[-66,44],[-70,42],[-75,35],[-80,25],[-85,15],[-92,15],[-100,20],[-110,23],[-118,32],[-122,37],[-124,48],[-130,54],[-140,58],[-152,60],[-160,60],[-165,62],[-168,66]],
+    // Greenland
+    [[-44,83],[-18,76],[-18,70],[-24,65],[-42,65],[-52,68],[-58,76],[-44,83]],
+    // South America
+    [[-80,8],[-76,8],[-67,1],[-50,-5],[-35,-5],[-38,-15],[-40,-20],[-44,-23],[-50,-28],[-53,-33],[-57,-38],[-62,-42],[-66,-50],[-68,-54],[-70,-55],[-75,-50],[-72,-35],[-72,-22],[-76,-5],[-80,0],[-80,8]],
+    // Europe
+    [[-10,36],[-9,44],[-2,46],[8,46],[12,44],[14,46],[16,48],[20,46],[22,44],[28,46],[30,60],[25,65],[20,68],[15,69],[10,63],[5,58],[0,51],[-5,48],[-5,44],[-10,36]],
+    // Scandinavia
+    [[5,58],[12,56],[10,63],[15,69],[20,70],[28,71],[30,70],[28,64],[22,60],[15,56],[10,57],[5,58]],
+    // UK
+    [[-6,50],[-2,50],[2,51],[0,53],[-3,56],[-5,58],[-6,57],[-5,54],[-6,50]],
+    // Iberia
+    [[-9,36],[-9,44],[-2,44],[3,42],[0,38],[-2,36],[-9,36]],
+    // Africa
+    [[-18,16],[-16,12],[-12,8],[-2,5],[8,4],[16,4],[22,4],[28,2],[34,0],[40,-4],[40,-10],[36,-18],[26,-34],[18,-34],[12,-24],[8,-2],[2,4],[-8,4],[-18,16],[0,16],[8,20],[24,20],[32,22],[36,18],[42,12],[36,22],[32,30],[32,36],[10,36],[-5,36],[-18,28],[-18,16]],
+    // Middle East + Arabia
+    [[28,36],[36,36],[44,40],[48,30],[56,24],[56,14],[44,12],[36,22],[34,30],[28,36]],
+    // Asia North
+    [[26,42],[36,36],[50,42],[70,44],[90,48],[110,54],[130,60],[140,60],[140,68],[100,74],[60,68],[40,68],[30,64],[26,62],[26,42]],
+    // Asia South
+    [[60,44],[80,44],[100,50],[120,56],[140,60],[140,50],[130,44],[122,32],[118,24],[100,8],[96,16],[92,22],[84,28],[68,24],[60,36],[60,44]],
+    // India
+    [[68,24],[80,28],[92,22],[88,18],[80,10],[72,10],[68,22],[68,24]],
+    // Indochina
+    [[98,22],[108,22],[110,18],[104,2],[100,2],[98,6],[98,22]],
+    // Japan (main)
+    [[130,32],[134,34],[138,36],[140,38],[142,44],[140,44],[136,36],[132,34],[130,32]],
+    // Indonesia (Sumatra)
+    [[96,6],[106,6],[106,-6],[98,-5],[96,2],[96,6]],
+    // Borneo
+    [[108,2],[118,6],[118,-2],[114,-4],[108,-2],[108,2]],
+    // Australia ← key shape
+    [[114,-22],[118,-20],[128,-14],[134,-12],[138,-14],[142,-20],[148,-20],[152,-24],[154,-28],[152,-32],[148,-38],[144,-38],[140,-36],[132,-32],[122,-34],[116,-34],[114,-30],[114,-22]],
+    // Tasmania
+    [[144,-40],[148,-40],[148,-44],[144,-44],[144,-40]],
+    // NZ North
+    [[172,-36],[178,-38],[178,-40],[174,-42],[172,-38],[172,-36]],
+    // NZ South
+    [[168,-44],[172,-44],[172,-46],[166,-46],[168,-44]],
+    // Madagascar
+    [[44,-12],[50,-14],[50,-24],[44,-26],[44,-12]],
+  ];
+
+  // Cities: [lon, lat, name, period, company, color, pulsing]
+  const CITIES = [
+    [-52.34, -31.77, 'PELOTAS',   'Dec 2020 — Oct 2022', 'Prodigious · Publicis',  '#bf5fff', false],
+    [-46.63, -23.55, 'SÃO PAULO', 'Oct 2022 — Sep 2025', 'Vati Group',              '#ff2d55', false],
+    [115.86, -31.95, 'PERTH',     '2025 — Present',       'Available for work',      '#00f5ff', true ],
+  ];
+
+  function draw() {
+    const W = canvas.width  = canvas.offsetWidth;
+    const H = canvas.height = canvas.offsetHeight;
+    ctx.clearRect(0, 0, W, H);
+
+    // ── Graticule ──
+    ctx.strokeStyle = 'rgba(232,230,255,0.06)';
+    ctx.lineWidth = 0.5;
+    for (let lat = -60; lat <= 90; lat += 30) {
+      const [,y] = proj(0, lat, W, H);
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+    for (let lon = -180; lon <= 180; lon += 30) {
+      const [x] = proj(lon, 0, W, H);
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    }
+
+    // ── Continents ──
+    CONTINENTS.forEach(ring => {
+      ctx.beginPath();
+      ring.forEach(([lon, lat], i) => {
+        const [x, y] = proj(lon, lat, W, H);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.closePath();
+      ctx.fillStyle   = 'rgba(0,245,255,0.07)';
+      ctx.strokeStyle = 'rgba(0,245,255,0.32)';
+      ctx.lineWidth   = 0.8;
+      ctx.fill();
+      ctx.stroke();
+    });
+
+    // ── Journey connection lines ──
+    const [x0, y0] = proj(CITIES[0][0], CITIES[0][1], W, H);
+    const [x1, y1] = proj(CITIES[1][0], CITIES[1][1], W, H);
+    const [x2, y2] = proj(CITIES[2][0], CITIES[2][1], W, H);
+
+    const t = (Date.now() % 3000) / 3000;
+
+    function drawArc(ax, ay, bx, by, color, offset) {
+      const mx = (ax + bx) / 2;
+      const my = Math.min(ay, by) - 40;
+      ctx.beginPath();
+      ctx.setLineDash([4, 6]);
+      ctx.lineDashOffset = -((t + offset) % 1) * 100;
+      ctx.strokeStyle = color;
+      ctx.lineWidth   = 1;
+      ctx.globalAlpha = 0.55;
+      ctx.moveTo(ax, ay);
+      ctx.quadraticCurveTo(mx, my, bx, by);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+    }
+
+    drawArc(x0, y0, x1, y1, '#bf5fff', 0);
+    drawArc(x1, y1, x2, y2, '#ff2d55', 0.4);
+
+    // ── City pins ──
+    const pulse = Math.sin(Date.now() / 500) * 0.5 + 0.5; // 0..1
+
+    CITIES.forEach(([lon, lat, name, period, company, color, pulsing]) => {
+      const [cx, cy] = proj(lon, lat, W, H);
+
+      // Pulse ring for current city
+      if (pulsing) {
+        const r = 6 + pulse * 18;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.strokeStyle = color;
+        ctx.lineWidth   = 1;
+        ctx.globalAlpha = (1 - pulse) * 0.7;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+
+        const r2 = 4 + pulse * 10;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r2, 0, Math.PI * 2);
+        ctx.strokeStyle = color;
+        ctx.lineWidth   = 0.8;
+        ctx.globalAlpha = (1 - pulse) * 0.5;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+
+      // Halo glow
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 12);
+      grad.addColorStop(0, color.replace(')', ',0.3)').replace('rgb', 'rgba'));
+      grad.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(cx, cy, 12, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Core dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+
+      // Leader line
+      ctx.strokeStyle = color;
+      ctx.lineWidth   = 0.7;
+      ctx.globalAlpha = 0.75;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 4);
+      ctx.lineTo(cx, cy - 18);
+      ctx.lineTo(cx + 6, cy - 18);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // Label text
+      ctx.font         = 'bold 8px monospace';
+      ctx.letterSpacing = '2px';
+      ctx.fillStyle    = color;
+      ctx.globalAlpha  = 0.95;
+      ctx.fillText(name, cx + 8, cy - 14);
+
+      ctx.font        = '6.5px monospace';
+      ctx.fillStyle   = color;
+      ctx.globalAlpha = 0.75;
+      ctx.fillText(company, cx + 8, cy - 7);
+
+      ctx.font        = '6px monospace';
+      ctx.fillStyle   = color;
+      ctx.globalAlpha = 0.5;
+      ctx.fillText(period, cx + 8, cy - 0.5);
+
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  function loop() { draw(); requestAnimationFrame(loop); }
+  window.addEventListener('resize', () => {}, { passive: true });
+  loop();
+})();
+
+/* ─── CONTACT CODE RAIN ─── */
+(function initCodeRain() {
+  const canvas = document.getElementById('contact-matrix');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Real code-like snippets — scrolling vertically in columns
+  const SNIPPETS = [
+    'const motion = new Timeline();',
+    'render({ fps: 60, quality: "4K" });',
+    'export default function Designer() {',
+    'git commit -m "ship it"',
+    'npm run build:production',
+    'transform: translateX(-50%);',
+    'animation: fadeIn 0.4s ease;',
+    'return <Portfolio projects={work}/>',
+    'ffmpeg -i input.mp4 -crf 18 out.mp4',
+    'docker run -p 3000:3000 portfolio',
+    'const brand = { color: "#00f5ff" };',
+    'keyframes: { 0%: opacity:0, 100%: opacity:1 }',
+    'for (let frame = 0; frame < 300; frame++)',
+    'ctx.fillStyle = "rgba(0,245,255,0.8)";',
+    'bezierCurveTo(cp1x, cp1y, cp2x, cp2y);',
+    'viewport.width = screen.availWidth;',
+    '.after-effects { blend-mode: screen; }',
+    'resolve({ status: 200, delivered: true });',
+    'const reel = await render(timeline, 4K);',
+    'dispatch({ type: "PROJECT_COMPLETE" });',
+  ];
+
+  const COL_W  = 340;
+  const SPEED  = 0.4;
+  const FS     = 11;
+  let cols = [];
 
   function resize() {
     canvas.width  = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
-    cols  = Math.floor(canvas.width / FONT_SIZE);
-    drops = Array.from({ length: cols }, () => Math.random() * -50);
+    const n = Math.ceil(canvas.width / COL_W) + 1;
+    cols = Array.from({ length: n }, (_, i) => ({
+      x:      i * COL_W,
+      y:      Math.random() * -canvas.height,
+      lines:  shuffleSnippets(),
+      li:     0,
+    }));
+  }
+
+  function shuffleSnippets() {
+    return [...SNIPPETS].sort(() => Math.random() - 0.5);
   }
 
   function draw() {
-    // Fade trail
-    ctx.fillStyle = 'rgba(5,5,7,0.055)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.font = `${FONT_SIZE}px monospace`;
-
-    for (let i = 0; i < cols; i++) {
-      const char = CHARS[Math.floor(Math.random() * CHARS.length)];
-      const y    = drops[i] * FONT_SIZE;
-
-      // Head glyph — bright cyan/white
-      const headAlpha = 0.9;
-      const isHead    = drops[i] > 0 && y < canvas.height;
-      ctx.fillStyle = isHead ? `rgba(220,255,255,${headAlpha})` : `rgba(0,245,255,0.65)`;
-      ctx.fillText(char, i * FONT_SIZE, y);
-
-      // Occasionally reset column
-      if (y > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
+    cols.forEach(col => {
+      col.y += SPEED;
+      if (col.y > canvas.height + 20) {
+        col.y = -canvas.height * 0.3;
+        col.lines = shuffleSnippets();
       }
-      drops[i] += 0.5;
-    }
+
+      col.lines.forEach((line, i) => {
+        const y = col.y + i * (FS + 6);
+        if (y < -20 || y > canvas.height + 20) return;
+
+        // brightness based on vertical position
+        const norm  = y / canvas.height;
+        const alpha = Math.max(0, Math.min(0.55, 0.55 - Math.abs(norm - 0.5) * 0.8));
+
+        // Highlight one "active" line per column
+        const isActive = i === Math.floor(((Date.now() / 1200) + col.x) % col.lines.length);
+        ctx.font      = isActive ? `bold ${FS}px monospace` : `${FS}px monospace`;
+        ctx.fillStyle = isActive
+          ? `rgba(0,245,255,${Math.min(alpha * 1.6, 0.7)})`
+          : `rgba(0,245,255,${alpha})`;
+        ctx.fillText(line, col.x, y);
+      });
+    });
   }
 
   resize();
   window.addEventListener('resize', resize, { passive: true });
-  setInterval(draw, 50);
+  setInterval(draw, 40);
 })();
