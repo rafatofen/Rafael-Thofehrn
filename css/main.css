@@ -1488,3 +1488,68 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
     linear-gradient(to bottom, rgba(5,5,7,0.7) 0%, rgba(5,5,7,0.2) 20%, rgba(5,5,7,0.2) 80%, rgba(5,5,7,0.7) 100%);
 }
 .contact > .container { position: relative; z-index: 2; }
+
+/* ═══════════════════════════════════
+   TIMELINE — GAME SELECTION HOVER
+═══════════════════════════════════ */
+.tl-item {
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+  border-radius: 2px;
+  padding: 4px 12px 4px 0;
+  margin-left: -12px;
+  cursor: default;
+}
+.tl-item:hover {
+  transform: translateX(8px) scale(1.012);
+  background: rgba(0,245,255,0.04);
+  box-shadow:
+    inset 3px 0 0 var(--neon-c),
+    0 0 32px rgba(0,245,255,0.08);
+}
+/* Role title lights up on hover */
+.tl-item:hover .tl-role { color: var(--neon-c); }
+.tl-item:hover .tl-dot  {
+  background: var(--neon-c);
+  box-shadow: 0 0 12px rgba(0,245,255,0.8);
+  transform: scale(1.4);
+}
+.tl-dot { transition: background .25s, box-shadow .25s, transform .25s; }
+
+/* ─── CONTACT FORM — brighter inputs ─── */
+.form-group input,
+.form-group textarea {
+  background: rgba(232,230,255,0.07) !important;
+  border: 1px solid rgba(232,230,255,0.2) !important;
+  color: var(--text) !important;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(232,230,255,0.45) !important;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  background: rgba(232,230,255,0.11) !important;
+  border-color: var(--neon-c) !important;
+  box-shadow: 0 0 0 1px rgba(0,245,255,0.2) !important;
+}
+.form-group label {
+  color: rgba(232,230,255,0.55) !important;
+}
+
+/* Code rain — ensure canvas only paints left side visually via vignette */
+.contact-matrix-vignette {
+  background:
+    linear-gradient(to right,
+      rgba(5,5,7,0.1)  0%,
+      rgba(5,5,7,0.1)  40%,
+      rgba(5,5,7,0.75) 55%,
+      rgba(5,5,7,0.97) 65%,
+      rgba(5,5,7,1)    75%
+    ),
+    linear-gradient(to bottom,
+      rgba(5,5,7,0.7) 0%,
+      rgba(5,5,7,0.15) 15%,
+      rgba(5,5,7,0.15) 85%,
+      rgba(5,5,7,0.7) 100%
+    ) !important;
+}
