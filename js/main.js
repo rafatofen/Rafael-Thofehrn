@@ -459,6 +459,9 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
 
   // Which city is highlighted (null = none, 'perth' always on top)
   let activeCity = null;
+  // Zoom state: smoothly lerp toward target
+  let zoomCx = 0, zoomCy = 0, zoomLvl = 1;
+  let targetCx = 0, targetCy = 0, targetZoom = 1;
 
   // Listen to timeline hover
   document.querySelectorAll('.tl-item[data-city]').forEach(item => {
@@ -553,6 +556,29 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
     const H = canvas.height = canvas.offsetHeight;
     ctx.clearRect(0, 0, W, H);
 
+    // Smooth zoom toward active city
+    if (activeCity && CITIES[activeCity]) {
+      const c = CITIES[activeCity];
+      const [px, py] = proj(c.lon, c.lat, W, H);
+      targetCx   = px;
+      targetCy   = py;
+      targetZoom = 2.4;
+    } else {
+      targetCx   = W / 2;
+      targetCy   = H / 2;
+      targetZoom = 1;
+    }
+    // Lerp zoom
+    zoomCx  += (targetCx   - zoomCx)   * 0.06;
+    zoomCy  += (targetCy   - zoomCy)   * 0.06;
+    zoomLvl += (targetZoom - zoomLvl)  * 0.06;
+
+    // Apply zoom transform
+    ctx.save();
+    ctx.translate(zoomCx, zoomCy);
+    ctx.scale(zoomLvl, zoomLvl);
+    ctx.translate(-zoomCx, -zoomCy);
+
     // Graticule
     ctx.lineWidth   = 0.4;
     ctx.strokeStyle = 'rgba(232,230,255,0.055)';
@@ -573,9 +599,9 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       });
       ctx.closePath();
-      ctx.fillStyle   = 'rgba(0,245,255,0.08)';
-      ctx.strokeStyle = 'rgba(0,245,255,0.35)';
-      ctx.lineWidth   = 0.7;
+      ctx.fillStyle   = 'rgba(0,245,255,0.13)';
+      ctx.strokeStyle = 'rgba(0,245,255,0.48)';
+      ctx.lineWidth   = 0.85;
       ctx.fill();
       ctx.stroke();
     });
@@ -604,6 +630,8 @@ document.querySelectorAll('.port-card, .gcard').forEach(card => {
       ctx.setLineDash([]);
       ctx.globalAlpha = 1;
     });
+
+    ctx.restore(); // end zoom transform
 
     // Draw pins — Perth always boosted, others boosted on hover
     Object.entries(CITIES).forEach(([key, city]) => {

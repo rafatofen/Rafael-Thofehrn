@@ -9,8 +9,8 @@
   --bg2: #080810;
   --bg3: #0d0d18;
   --text: #e8e6ff;
-  --text-muted: rgba(232,230,255,0.5);
-  --text-dim: rgba(232,230,255,0.2);
+  --text-muted: rgba(232,230,255,0.72);
+  --text-dim: rgba(232,230,255,0.42);
   --neon-r: #ff2d55;     /* red-pink neon */
   --neon-g: #39ff14;     /* green neon */
   --neon-c: #00f5ff;     /* cyan neon */
@@ -19,8 +19,8 @@
   --display: 'Bebas Neue', sans-serif;
   --body: 'Syne', sans-serif;
   --logo-font: 'Inter', sans-serif;
-  --border: rgba(232,230,255,0.07);
-  --border-neon: rgba(0,245,255,0.25);
+  --border: rgba(232,230,255,0.14);
+  --border-neon: rgba(0,245,255,0.38);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -143,7 +143,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
   letter-spacing: 2px; line-height: .92; margin-bottom: 64px;
   color: var(--text);
 }
-.section-title em { font-style: normal; color: transparent; -webkit-text-stroke: 1px rgba(232,230,255,0.35); }
+.section-title em { font-style: normal; color: transparent; -webkit-text-stroke: 1px rgba(232,230,255,0.55); }
 
 /* ─── BUTTONS ─── */
 .btn-neon {
@@ -295,7 +295,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
   position: absolute; bottom: 36px; left: 48px; z-index: 2;
   display: flex; align-items: center; gap: 12px;
   font-family: var(--mono); font-size: .65rem; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--text-dim);
+  text-transform: uppercase; color: rgba(232,230,255,0.45);
 }
 .scroll-line-wrap { width: 40px; height: 1px; background: var(--text-dim); overflow: hidden; }
 .scroll-line-inner {
@@ -387,7 +387,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
   gap: 0 24px; position: relative;
 }
 .tl-left { padding-top: 4px; padding-bottom: 48px; }
-.tl-period { font-family: var(--mono); font-size: .65rem; letter-spacing: 1.5px; color: var(--text-dim); text-transform: uppercase; line-height: 1.7; margin-bottom: 10px; }
+.tl-period { font-family: var(--mono); font-size: .65rem; letter-spacing: 1.5px; color: rgba(232,230,255,0.55); text-transform: uppercase; line-height: 1.7; margin-bottom: 10px; }
 .tl-badge {
   font-family: var(--mono); font-size: .6rem; letter-spacing: 1.5px;
   text-transform: uppercase; padding: 4px 10px;
@@ -418,7 +418,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 
 /* ─── TOOLS ─── */
 .tools-block { margin-top: 20px; }
-.tools-heading { font-family: var(--mono); font-size: .7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; }
+.tools-heading { font-family: var(--mono); font-size: .7rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(232,230,255,0.55); margin-bottom: 20px; }
 .tools-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .tool-chip {
   display: flex; align-items: center; gap: 10px;
@@ -526,7 +526,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 
 .contact-details { margin-bottom: 36px; display: flex; flex-direction: column; gap: 20px; }
 .cd-item { border-bottom: 1px solid var(--border); padding-bottom: 20px; }
-.cd-label { font-family: var(--mono); font-size: .62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 6px; }
+.cd-label { font-family: var(--mono); font-size: .62rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(232,230,255,0.55); display: block; margin-bottom: 6px; }
 .cd-value { font-size: .95rem; font-weight: 600; color: var(--text); text-decoration: none; transition: color .2s; }
 .cd-value:hover { color: var(--neon-c); }
 
@@ -1518,13 +1518,13 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 /* ─── CONTACT FORM — brighter inputs ─── */
 .form-group input,
 .form-group textarea {
-  background: rgba(232,230,255,0.07) !important;
-  border: 1px solid rgba(232,230,255,0.2) !important;
+  background: rgba(232,230,255,0.09) !important;
+  border: 1px solid rgba(232,230,255,0.28) !important;
   color: var(--text) !important;
 }
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: rgba(232,230,255,0.45) !important;
+  color: rgba(232,230,255,0.6) !important;
 }
 .form-group input:focus,
 .form-group textarea:focus {
@@ -1533,7 +1533,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
   box-shadow: 0 0 0 1px rgba(0,245,255,0.2) !important;
 }
 .form-group label {
-  color: rgba(232,230,255,0.55) !important;
+  color: rgba(232,230,255,0.7) !important;
 }
 
 /* Code rain — ensure canvas only paints left side visually via vignette */
