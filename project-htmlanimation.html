@@ -1,326 +1,106 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barões da Pisadinha - Lyric Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/background.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <style>
-        /* Project Page Specific Styles */
-        .project-container {
-            min-height: 100vh;
-            padding-top: 120px;
-            padding-bottom: 60px;
-        }
-
-        .project-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .project-title {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .project-category {
-            color: #e74c3c;
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 30px;
-        }
-
-        .project-description {
-            color: #b8b8b8;
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* Project Images */
-        .project-images {
-            margin: 60px 0;
-        }
-
-        .main-image {
-            width: 100%;
-            max-width: 1000px;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 0px;
-            margin: 0 auto 0px;
-            display: block;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .secondary-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .secondary-image:hover {
-            transform: scale(1.05);
-        }
-
-        /* Project Details */
-        .project-details {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 60px 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .detail-section h3 {
-            color: #e74c3c;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .detail-section p, .detail-section ul {
-            color: #b8b8b8;
-            line-height: 1.6;
-        }
-
-        .detail-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .detail-section li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .detail-section li:before {
-            content: "•";
-            color: #e74c3c;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Tech Stack */
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .tech-tag {
-            background: rgba(255, 107, 107, 0.1);
-            color: #e74c3c;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            font-weight: 500;
-        }
-
-        /* Navigation */
-        .project-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-button {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-button:hover {
-            background: rgba(255, 107, 107, 0.2);
-            border-color: rgba(255, 107, 107, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .nav-button.primary {
-            background: linear-gradient(135deg, #e74c3c, #e74c3c);
-            border-color: #e74c3c;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .project-container {
-                padding-top: 100px;
-            }
-
-            .project-title {
-                font-size: 2.2rem;
-            }
-
-            .project-details {
-                padding: 30px 20px;
-                margin: 40px 0;
-            }
-
-            .details-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .main-image {
-                height: 300px;
-                margin: 0 20px 40px;
-            }
-
-            .project-nav {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .project-title {
-                font-size: 1.8rem;
-            }
-
-            .project-description {
-                font-size: 1rem;
-                padding: 0 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HTML5 Animation — Rafael Thofehrn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Syne+Mono&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="icon" href="favicon.ico"/>
 </head>
 <body>
-    <!-- Background animado -->
-    <div class="animated-background">
-        <div class="geometric-shapes"></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div id="cur" aria-hidden="true"></div>
+<div id="cur-ring" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo"><span class="logo-r">Rafael</span><span class="logo-t">Thofehrn</span></a>
+  <nav><ul class="nav-list">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="index.html#reel">Reel</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul></nav>
+  <a href="https://drive.google.com/file/d/1vHFc_T145xbv9X3YmAtdcXvVGvhJw_3y/view?usp=sharing" target="_blank" class="nav-cta">Resume ↗</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-menu" id="mobileMenu"><ul>
+  <li><a href="index.html#about" class="mob-link">About</a></li>
+  <li><a href="index.html#experience" class="mob-link">Experience</a></li>
+  <li><a href="portfolio.html" class="mob-link">Portfolio</a></li>
+  <li><a href="index.html#reel" class="mob-link">Reel</a></li>
+  <li><a href="index.html#contact" class="mob-link">Contact</a></li>
+</ul></div>
+
+<!-- PROJECT HERO -->
+<div class="proj-page-hero">
+  <div class="hero-grid-lines" aria-hidden="true"></div>
+  <div class="proj-hero-content">
+    <div class="proj-hero-breadcrumb">
+      <a href="portfolio.html" class="breadcrumb">Portfolio</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="work-web.html" class="breadcrumb">Web Development</a>
     </div>
+    <div class="proj-hero-meta">
+      <span class="proj-cat-badge">HTML Animation & Motion Graphics</span>
+    </div>
+    <h1 class="proj-hero-title">HTML5 Animation</h1>
+    <p class="proj-hero-desc">Art creation and Motion Graphics for Barões da Pisadinha Lyric Video — brought to life as an HTML5 interactive animation.</p>
+  </div>
+  <div class="proj-hero-img proj-hero-img--placeholder"><span>HT</span></div>
+</div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo">
-                    <span class="logo-first">Rafael</span><span class="logo-last">Thofehrn</span>
-                </a>
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#experience">Experience</a></li>
-                        <li><a href="gallery.html">Portfolio</a></li>
-                        <li><a href="index.html#motion-reel">Motion Reel</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </header>
+<!-- CONTENT -->
+<div class="proj-content">
 
-    <!-- Project Content -->
-    <section class="project-container">
-        <div class="container">
-            <div class="project-header fade-in-up">
-                <h1 class="project-title">Barões da Pisadinha Lyric Video</h1>
-                <p class="project-category">Motion Graphics</p>
-                <p class="project-description">
-                    Art creation and Motion Graphics for Barões da Pisadinha Lyric Video.
-                </p>
-            </div>
+  <div class="proj-video reveal">
+    <div class="proj-video-inner">
+      <iframe src="https://www.youtube.com/embed/tOA-P5jj5EA" title="Project Video"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="reel-corner tl"></div><div class="reel-corner tr"></div>
+    <div class="reel-corner bl"></div><div class="reel-corner br"></div>
+  </div>
 
-            <!-- Project Images -->
-            <div class="video-container scale-in" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-            <!-- iframe para vídeo YouTube responsivo -->
-            <iframe
-                src="https://www.youtube.com/embed/tOA-P5jj5EA"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                style="position: absolute; top:0; left:0; width:100%; height:100%;">
-            </iframe>
-            </div>
+  <div class="proj-details-grid">
+      <div class="proj-detail reveal">
+    <div class="proj-detail-label">Challenge</div>
+    <div class="proj-detail-body"><p>Create a fun, visually engaging HTML5 animation synced to music.</p></div>
+  </div>
+  <div class="proj-detail reveal">
+    <div class="proj-detail-label">Creation Process</div>
+    <div class="proj-detail-body">
+      <ul>
+        <li>Art Creation</li>
+        <li>Motion Graphics</li>
+        <li>HTML5 Animation</li>
+      </ul></div>
+  </div>
+  </div>
 
-            <!-- Project Details -->
-            <div class="project-details">
-                <div class="details-grid">
-                    <div class="detail-section">
-                        <h3>Challenge</h3>
-                        <p>
-                           Create a funny lyric video for the music "tá rocheda" from Barões da Pisadinha.
-                        </p>
-                    </div>
-                    <div class="detail-section">
-                        <h3>Creation process</h3>
-                        <ul>
-                            <li>Art Creation</li>
-                            <li>Motion Graphics</li>
-                        </ul>
-                    </div>
+  <div class="proj-tech-row reveal"><span class="proj-tech">Photoshop</span> <span class="proj-tech">After Effects</span> <span class="proj-tech">HTML5</span> <span class="proj-tech">CSS</span> <span class="proj-tech">JavaScript</span></div>
 
-                    <div class="detail-section">
-                        <h3>Softwares Used</h3>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Photoshop</span>
-                            <span class="tech-tag">After Effects</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+</div>
 
-            <!-- Navigation -->
-            <div class="project-nav">
-                <a href="gallery.html" class="nav-button primary">Return to Portfolio</a>
-            </div>
-        </div>
-    </section>
+<div class="proj-pagination">
+  <a href="portfolio.html" class="proj-nav-prev btn-ghost">← All Work</a>
+  
+</div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Rafael Thofehrn. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><span class="logo-r">Rafael</span><span class="logo-t">Thofehrn</span></div>
+    <div class="footer-copy">© 2026 Rafael Thofehrn. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="https://www.linkedin.com/in/rafatofen" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
 </body>
 </html>
-
-
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-
