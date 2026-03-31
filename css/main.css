@@ -1573,6 +1573,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
   align-items: center;
   justify-content: center;
   gap: 16px;
+  pointer-events: none; /* adiciona isso */
 }
 .construction-dot {
   width: 6px; height: 6px;
