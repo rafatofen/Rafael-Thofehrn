@@ -1553,3 +1553,32 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
       rgba(5,5,7,0.7) 100%
     ) !important;
 }
+
+/* ─── UNDER CONSTRUCTION BANNER ─── */
+.construction-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9995;
+  background: rgba(5,5,7,0.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(232,230,255,0.12);
+  padding: 10px 24px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(232,230,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.construction-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--neon-c);
+  box-shadow: 0 0 8px var(--neon-c);
+  animation: blink 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
