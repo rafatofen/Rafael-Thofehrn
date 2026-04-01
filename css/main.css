@@ -1608,3 +1608,16 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 .proj-site-btn:hover::before { transform: translateX(0); }
 .proj-site-btn:hover { color: var(--bg); box-shadow: 0 0 24px rgba(0,245,255,.35); }
 .proj-site-btn span { position: relative; z-index: 1; }
+
+/* Hide scanlines on project pages — clean image display */
+body.proj-page .scanlines { display: none !important; }
+
+/* Project images — zero gap, seamless */
+.proj-img-grid {
+  gap: 0 !important;
+}
+.proj-img-item {
+  border: none !important;
+  border-bottom: none !important;
+  margin: 0 !important;
+}
