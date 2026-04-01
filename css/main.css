@@ -997,16 +997,27 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
   border: 1px solid var(--border);
 }
 .proj-img-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  grid-template-columns: unset !important;
 }
-.proj-img-item { overflow: hidden; border: 1px solid var(--border); width: 100%; }
+.proj-img-item {
+  overflow: hidden !important;
+  border: 1px solid var(--border) !important;
+  width: 100% !important;
+  display: block !important;
+  aspect-ratio: unset !important;
+}
 .proj-img-item img {
-  width: 100%; height: auto; display: block;
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: unset !important;
+  filter: none !important;
   transition: transform .6s ease;
 }
-.proj-img-item:hover img { transform: scale(1.02); }
+.proj-img-item:hover img { transform: scale(1.01); }
 
 /* ── Details grid ── */
 .proj-details-grid {
@@ -1081,7 +1092,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 }
 @media (max-width: 600px) {
   .proj-details-grid { grid-template-columns: 1fr; }
-  .proj-img-grid { grid-template-columns: 1fr; }
+  .proj-img-grid { grid-template-columns: unset !important; }
   .proj-pagination { flex-direction: column; gap: 14px; text-align: center; }
 }
 
@@ -1551,3 +1562,49 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
       rgba(5,5,7,0.7) 100%
     ) !important;
 }
+
+
+/* ═══ PROJECT PAGES — CLEAN OVERRIDES ═══ */
+/* No animated grid on project hero */
+.proj-page-hero .hero-grid-lines { display: none !important; }
+
+/* No grayscale / overlay on project images — pure display */
+.proj-content img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+.proj-img-item {
+  position: relative;
+}
+/* Remove any pseudo overlays */
+.proj-img-item::after,
+.proj-img-item::before { display: none !important; }
+
+/* View Website button in hero */
+.proj-site-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  text-decoration: none;
+  color: var(--neon-c);
+  border: 1px solid var(--neon-c);
+  transition: all .25s;
+  position: relative;
+  overflow: hidden;
+}
+.proj-site-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--neon-c);
+  transform: translateX(-101%);
+  transition: transform .3s ease;
+}
+.proj-site-btn:hover::before { transform: translateX(0); }
+.proj-site-btn:hover { color: var(--bg); box-shadow: 0 0 24px rgba(0,245,255,.35); }
+.proj-site-btn span { position: relative; z-index: 1; }
