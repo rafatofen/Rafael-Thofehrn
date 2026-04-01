@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Solutions — Rafael Thofehrn</title>
+  <title>The Rang Uluwatu Demo Video — Rafael Thofehrn</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Syne+Mono&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="icon" href="favicon.ico"/>
 </head>
-<body>
+<body class="proj-page">
 <div class="scanlines" aria-hidden="true"></div>
 <div id="cur" aria-hidden="true"></div>
 <div id="cur-ring" aria-hidden="true"></div>
@@ -33,51 +33,46 @@
   <li><a href="index.html#reel" class="mob-link">Reel</a></li>
   <li><a href="index.html#contact" class="mob-link">Contact</a></li>
 </ul></div>
-
-<div class="page-hero page-hero--short">
+<div class="proj-page-hero">
   <div class="hero-grid-lines" aria-hidden="true"></div>
-  <div class="page-hero-content">
-    <div class="page-hero-label"><a href="portfolio.html" class="breadcrumb">← Portfolio</a> / AI Solutions</div>
-    <h1 class="page-hero-title glitch" data-text="AI">AI</h1>
-    <p class="page-hero-sub">Leveraging generative AI to accelerate creative production.</p>
+  <div class="proj-hero-content">
+    <div class="proj-hero-breadcrumb">
+      <a href="portfolio.html" class="breadcrumb">Portfolio</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="work-video.html" class="breadcrumb">Video Editing</a>
+    </div>
+    <div class="proj-hero-meta"><span class="proj-cat-badge">Video Editing</span></div>
+    <h1 class="proj-hero-title">The Rang Uluwatu Demo Video</h1>
+    <p class="proj-hero-desc">Full demo video production for The Rang Uluwatu — showcasing the property, amenities and experience for prospective guests.</p>
+    
   </div>
+  <div class="proj-hero-img"><img src="images/sm_rang_1.jpg" alt="The Rang Uluwatu Demo Video" onerror="this.parentElement.classList.add('proj-hero-img--placeholder');this.parentElement.innerHTML='<span>TH</span>'"/></div>
 </div>
 
-<section class="gallery-section">
-  <div class="gallery-grid" id="galleryGrid">
+<div class="proj-content">
 
-    <a href="project-ai-rang.html" class="gcard reveal gcard--featured">
-      <div class="gcard-img" style="background-image:url('images/ai_rang_1.jpg')"></div>
-      <div class="gcard-overlay"></div>
-      <div class="gcard-info">
-        <div class="gcard-tags"><span>AI</span><span>Image Generation</span><span>Video</span></div>
-        <h3 class="gcard-title">The Rang — AI Image & Video Generation</h3>
-      </div>
-      <span class="gcard-arrow">↗</span>
-    </a>
-    <a href="project-ai-nest.html" class="gcard reveal delay-1">
-      <div class="gcard-img" style="background-image:url('images/ai_nest_1.jpg')"></div>
-      <div class="gcard-overlay"></div>
-      <div class="gcard-info">
-        <div class="gcard-tags"><span>AI</span><span>Image</span><span>Video</span><span>Voice</span></div>
-        <h3 class="gcard-title">Nest Cosmetics — AI Generation</h3>
-      </div>
-      <span class="gcard-arrow">↗</span>
-    </a>
+  <div class="proj-video reveal">
+    <div class="proj-video-inner"><iframe src="https://www.youtube.com/embed/nI-RpDBCQ9A" title="Project Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="reel-corner tl"></div><div class="reel-corner tr"></div><div class="reel-corner bl"></div><div class="reel-corner br"></div>
   </div>
-</section>
 
-<div class="work-back-row">
-  <a href="portfolio.html" class="btn-ghost">← Back to Portfolio</a>
+  <div class="proj-details-grid">
+    <div class="proj-detail reveal"><div class="proj-detail-label">About</div><div class="proj-detail-body"><p>Full demo video production for The Rang Uluwatu — showcasing the property, amenities and experience for prospective guests.</p></div></div>
+    <div class="proj-detail reveal"><div class="proj-detail-label">Deliverables</div><div class="proj-detail-body"><p>Full video production including filming, editing, colour grading and sound design.</p></div></div>
+  </div>
+
+  <div class="proj-tech-row reveal"><span class="proj-tech">Premiere Pro</span> <span class="proj-tech">After Effects</span> <span class="proj-tech">Media Encoder</span> <span class="proj-tech">DaVinci Resolve</span></div>
+
 </div>
+
+<div class="proj-pagination"><a href="portfolio.html" class="proj-nav-prev btn-ghost">← All Work</a></div>
 
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-logo"><span class="logo-r">Rafael</span><span class="logo-t">Thofehrn</span></div>
     <div class="footer-copy">© 2026 Rafael Thofehrn. All rights reserved.</div>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="https://www.behance.net/rafatofen" target="_blank">Behance</a>
+      <a href="index.html">Home</a><a href="portfolio.html">Portfolio</a>
       <a href="https://www.linkedin.com/in/rafatofen" target="_blank">LinkedIn</a>
     </div>
   </div>

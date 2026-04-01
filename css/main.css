@@ -1682,3 +1682,39 @@ body.proj-page .scanlines { display: none !important; }
   .cat-grid--6 .cat-box { border-right: none !important; border-bottom: 1px solid var(--border) !important; }
   .cat-grid--6 .cat-box:last-child { border-bottom: none !important; }
 }
+
+/* ═══════════════════════════════════
+   SOCIAL MEDIA — 3-col square grid
+═══════════════════════════════════ */
+.sm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.sm-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--bg3);
+}
+.sm-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: none !important;
+  transition: transform .5s ease;
+}
+.sm-item:hover img { transform: scale(1.05); }
+
+/* AI section label */
+.proj-ai-label {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--neon-g);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .sm-grid { grid-template-columns: repeat(2, 1fr); }
+}
