@@ -12,20 +12,6 @@
 </head>
 <body>
 
-<!-- UNDER CONSTRUCTION BANNER -->
-<div class="construction-banner">
-  <span class="construction-dot"></span>
-  This website is under construction — bugs may apply
-  <span class="construction-dot"></span>
-</div>
-
-<!-- UNDER CONSTRUCTION FORCADO -->
-<div style="position:fixed; bottom:0; left:0; right:0; z-index:9999; background:rgba(5,5,7,0.95); border-top:1px solid rgba(0,245,255,0.3); padding:10px 24px; text-align:center; font-family:monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#00f5ff; display:flex; align-items:center; justify-content:center; gap:16px;">
-  <span style="width:6px;height:6px;border-radius:50%;background:#00f5ff;box-shadow:0 0 8px #00f5ff;display:inline-block;animation:blink 1.8s ease-in-out infinite;"></span>
-  This website is under construction — bugs may apply
-  <span style="width:6px;height:6px;border-radius:50%;background:#00f5ff;box-shadow:0 0 8px #00f5ff;display:inline-block;animation:blink 1.8s ease-in-out infinite;"></span>
-</div>
-
 <!-- SCANLINES OVERLAY -->
 <div class="scanlines" aria-hidden="true"></div>
 
@@ -70,12 +56,71 @@
   <div class="hero-noise"></div>
   <div class="hero-grid-lines" aria-hidden="true"></div>
 
-  <!-- big glitch name -->
+  <!-- S-curve — right side, more curved, pulled 20% left -->
+  <svg class="hero-flow-line" aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%"   style="stop-color:#00f5ff;stop-opacity:0"/>
+        <stop offset="20%"  style="stop-color:#00f5ff;stop-opacity:0.85"/>
+        <stop offset="48%"  style="stop-color:#bf5fff;stop-opacity:0.7"/>
+        <stop offset="75%"  style="stop-color:#39ff14;stop-opacity:0.65"/>
+        <stop offset="100%" style="stop-color:#39ff14;stop-opacity:0"/>
+      </linearGradient>
+      <linearGradient id="sGradGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%"   style="stop-color:#00f5ff;stop-opacity:0"/>
+        <stop offset="20%"  style="stop-color:#00f5ff;stop-opacity:0.15"/>
+        <stop offset="48%"  style="stop-color:#bf5fff;stop-opacity:0.12"/>
+        <stop offset="75%"  style="stop-color:#39ff14;stop-opacity:0.14"/>
+        <stop offset="100%" style="stop-color:#39ff14;stop-opacity:0"/>
+      </linearGradient>
+      <filter id="sGlow" x="-80%" y="-20%" width="260%" height="140%">
+        <feGaussianBlur stdDeviation="10" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <!-- Pivot at 960,450 (7% right of previous), very deep S curves -->
+    <g transform="rotate(-30, 960, 450)">
+      <!-- soft glow pass -->
+      <path id="sCurve" class="flow-path-glow"
+        d="M 1100 -120 C 1600 -20, 600 200, 1000 450 C 1400 700, 600 800, 1000 1050"
+        stroke="url(#sGradGlow)" stroke-width="80" fill="none" stroke-linecap="round"/>
+      <!-- core stroke -->
+      <path class="flow-path-main"
+        d="M 1100 -120 C 1600 -20, 600 200, 1000 450 C 1400 700, 600 800, 1000 1050"
+        stroke="url(#sGrad)" stroke-width="14" fill="none" stroke-linecap="round" filter="url(#sGlow)"/>
+      <!-- travelling dots -->
+      <circle r="7" fill="#00f5ff" opacity="0.95" filter="url(#sGlow)">
+        <animateMotion dur="6s" repeatCount="indefinite" begin="1s">
+          <mpath href="#sCurve"/>
+        </animateMotion>
+      </circle>
+      <circle r="4.5" fill="#bf5fff" opacity="0.85">
+        <animateMotion dur="6s" repeatCount="indefinite" begin="-2s">
+          <mpath href="#sCurve"/>
+        </animateMotion>
+      </circle>
+      <circle r="4" fill="#39ff14" opacity="0.9" filter="url(#sGlow)">
+        <animateMotion dur="6s" repeatCount="indefinite" begin="-4s">
+          <mpath href="#sCurve"/>
+        </animateMotion>
+      </circle>
+    </g>
+  </svg>
+
   <div class="hero-center">
-    <div class="glitch-wrap">
-      <h1 class="glitch" data-text="RAFAEL">RAFAEL</h1>
-      <h1 class="glitch glitch-last" data-text="THOFEHRN">THOFEHRN</h1>
+    <!-- greeting -->
+    <div class="hero-name-label" aria-label="Hi, I'm Rafael Thofehrn">
+      <span class="hero-wave">👋</span>
+      <span class="hero-name-text">Hi, I'm <strong>Rafael Thofehrn</strong></span>
     </div>
+
+    <!-- MAIN HEADLINE -->
+    <h1 class="hero-headline" id="heroHeadline" aria-label="Turning problems into creative solutions across multiple platforms — with efficiency and purpose.">
+      <span class="hero-hl-line" id="heroLine1"></span>
+      <span class="hero-hl-line" id="heroLine2"></span>
+      <span class="hero-hl-line" id="heroLine3"></span>
+    </h1>
+
     <div class="hero-sub-row">
       <span class="hero-role">Motion Designer</span>
       <span class="hero-dot">◆</span>
@@ -83,10 +128,7 @@
       <span class="hero-dot">◆</span>
       <span class="hero-role">Perth, AU</span>
     </div>
-    <p class="hero-desc">
-      Turning <span class="neon-r">problems</span> into <span class="neon-g">creative solutions</span><br/>
-      across multiple platforms — with efficiency and purpose.
-    </p>
+
     <div class="hero-ctas">
       <a href="portfolio.html" class="btn-neon">View Work</a>
       <a href="#contact" class="btn-ghost">Get in Touch</a>
@@ -560,7 +602,7 @@
         <div class="contact-details">
           <div class="cd-item">
             <span class="cd-label">Email</span>
-            <a href="mailto:rafathofehrn@gmail.com" class="cd-value">rafathofehrn@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#2c5e4d4a4d5844434a49445e426c4b414d4540024f4341" class="cd-value"><span class="__cf_email__" data-cfemail="abd9cacdcadfc3c4cdcec3d9c5ebccc6cac2c785c8c4c6">[email&#160;protected]</span></a>
           </div>
           <div class="cd-item">
             <span class="cd-label">Phone</span>
@@ -623,6 +665,7 @@
       <a href="portfolio.html">Portfolio</a>
       <a href="https://www.behance.net/rafatofen" target="_blank">Behance</a>
       <a href="https://www.linkedin.com/in/rafatofen" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/rafael.thofehrn/" target="_blank">Instagram</a>
     </div>
   </div>
 </footer>
