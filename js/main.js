@@ -2,6 +2,120 @@
    RAFAEL THOFEHRN — main.js
 ═══════════════════════════════════════════════════════════ */
 
+/* ─── HERO HEADLINE ANIMATION ─── */
+document.addEventListener('DOMContentLoaded', function() {
+(function initHeroHeadline() {
+  const lines = [
+    { id: 'heroLine1', text: 'Turning [problems] into' },
+    { id: 'heroLine2', text: '[creative solutions] across platforms' },
+    { id: 'heroLine3', text: 'with efficiency and purpose.' },
+  ];
+
+  const CHAR_DELAY = 38;
+  const LINE_PAUSE = 160;
+  let globalDelay  = 500;
+
+  lines.forEach((line) => {
+    const el = document.getElementById(line.id);
+    if (!el) return;
+
+    const segments = [];
+    let raw = line.text;
+    const re = /\[([^\]]+)\]/g;
+    let lastIdx = 0, m;
+    while ((m = re.exec(raw)) !== null) {
+      if (m.index > lastIdx) segments.push({ text: raw.slice(lastIdx, m.index), type: 'normal' });
+      const word = m[1];
+      const type = word === 'problems' ? 'problems' : 'creative';
+      segments.push({ text: word, type });
+      lastIdx = m.index + m[0].length;
+    }
+    if (lastIdx < raw.length) segments.push({ text: raw.slice(lastIdx), type: 'normal' });
+
+    buildLine(el, segments, globalDelay, CHAR_DELAY);
+
+    // advance globalDelay by all chars + line pause
+    let count = 0;
+    segments.forEach(s => count += [...s.text].length);
+    globalDelay += count * CHAR_DELAY + LINE_PAUSE;
+  });
+
+  // Reveal sub-row and CTAs after headline finishes
+  setTimeout(() => {
+    const subRow = document.querySelector('.hero-sub-row');
+    const ctas   = document.querySelector('.hero-ctas');
+    if (subRow) { subRow.style.animationDelay = '0ms'; }
+    if (ctas)   { ctas.style.animationDelay   = '120ms'; }
+  }, globalDelay);
+
+  function buildLine(el, segments, startDelay, charDelay) {
+    el.innerHTML = '';
+    let delay = startDelay;
+
+    segments.forEach(seg => {
+      if (seg.type === 'normal') {
+        [...seg.text].forEach(ch => {
+          el.appendChild(makeChar(ch, delay, []));
+          delay += charDelay;
+        });
+      } else {
+        const cls = seg.type === 'problems' ? 'hero-word-problems' : 'hero-word-creative';
+        const wordWrap = document.createElement('span');
+        wordWrap.classList.add(cls);
+
+        const wordEndDelay = delay + ([...seg.text].length - 1) * charDelay;
+        // underline animates in after last char
+        wordWrap.style.setProperty('--underline-delay', (wordEndDelay + 80) + 'ms');
+        wordWrap.style.animationDelay = (wordEndDelay + 80) + 'ms';
+        // glow fades in at the same time as the underline
+        wordWrap.style.setProperty('--glow-delay', (wordEndDelay + 80) + 'ms');
+
+        [...seg.text].forEach(ch => {
+          wordWrap.appendChild(makeChar(ch, delay, []));
+          delay += charDelay;
+        });
+
+        if (seg.type === 'creative') addSparks(wordWrap, wordEndDelay);
+
+        el.appendChild(wordWrap);
+      }
+    });
+  }
+
+  function makeChar(ch, delay, extraClasses) {
+    const span = document.createElement('span');
+    span.classList.add('hero-char');
+    extraClasses.forEach(c => span.classList.add(c));
+    span.style.animationDelay = delay + 'ms';
+    if (ch === ' ') { span.innerHTML = '&nbsp;'; span.style.display = 'inline'; }
+    else span.textContent = ch;
+    return span;
+  }
+
+  function addSparks(parent, baseDelay) {
+    const data = [
+      { tx: '18px',  ty: '-22px', dur: '2.8s', del: baseDelay + 300 },
+      { tx: '-14px', ty: '-18px', dur: '3.2s', del: baseDelay + 500 },
+      { tx: '30px',  ty: '-10px', dur: '2.5s', del: baseDelay + 200 },
+      { tx: '-22px', ty: '-24px', dur: '3.6s', del: baseDelay + 700 },
+      { tx: '10px',  ty: '-28px', dur: '2.9s', del: baseDelay + 400 },
+      { tx: '-8px',  ty: '-16px', dur: '3.1s', del: baseDelay + 600 },
+    ];
+    data.forEach((s, i) => {
+      const sp = document.createElement('span');
+      sp.classList.add('spark');
+      sp.style.setProperty('--tx', s.tx);
+      sp.style.setProperty('--ty', s.ty);
+      sp.style.setProperty('--dur', s.dur);
+      sp.style.setProperty('--del', s.del + 'ms');
+      sp.style.left = (8 + i * 15) + '%';
+      sp.style.top  = '50%';
+      parent.appendChild(sp);
+    });
+  }
+})();
+}); // end DOMContentLoaded
+
 /* ─── INTERACTIVE HERO CANVAS ─── */
 (function initHeroCanvas() {
   const canvas = document.getElementById('hero-canvas');
@@ -181,14 +295,18 @@ if (cur && ring) {
   })();
 }
 
-/* ─── NAV SCROLL ─── */
+/* ─── NAV SCROLL — transparent on hero, solid after ─── */
 const nav = document.getElementById('nav');
 if (nav) {
-  window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 60
-      ? 'rgba(232,230,255,0.14)'
-      : 'rgba(232,230,255,0.07)';
-  }, { passive: true });
+  const onScroll = () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on load
 }
 
 /* ─── HAMBURGER MENU ─── */
