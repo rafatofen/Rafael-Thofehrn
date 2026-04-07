@@ -339,7 +339,7 @@ body:has(a:hover) #cur-ring, body:has(button:hover) #cur-ring { width: 52px; hei
 /* Each animated character */
 .hero-char {
   display: inline-block;
-  opacity: 0;
+  opacity: 1;
   filter: blur(10px);
   transform: translateY(12px) translateX(-3px);
   animation: charReveal 0.5s cubic-bezier(.22,1,.36,1) forwards;
